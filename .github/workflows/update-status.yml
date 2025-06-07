@@ -1,0 +1,46 @@
+name: Update status.md daily
+
+on:
+  schedule:
+    - cron: '5 13 * * *' # Runs every day at 13:05 UTC
+
+jobs:
+  update-status:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Update status.md
+        run: |
+          #!/usr/bin/env bash
+          # Get current date and time in Berlin timezone
+          export TZ=Europe/Berlin
+          DATE=$(date '+%Y-%m-%d')
+          TIME=$(date '+%H:%M')
+          ZONE="Berlin"
+          # Write to status.md
+          echo "# Status" > status.md
+          echo "" >> status.md
+          echo "## Date" >> status.md
+          echo "$DATE" >> status.md
+          echo "" >> status.md
+          echo "## Time" >> status.md
+          echo "$TIME" >> status.md
+          echo "" >> status.md
+          echo "## Zone" >> status.md
+          echo "$ZONE" >> status.md
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add status.md
+          git commit -m "Automated update of status.md [skip ci]" || exit 0
+          git push
