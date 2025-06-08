@@ -3,6 +3,7 @@ name: Update status.md daily
 on:
   schedule:
     - cron: '5 13 * * *' # Runs every day at 13:05 UTC
+  workflow_dispatch:
 
 jobs:
   update-status:
