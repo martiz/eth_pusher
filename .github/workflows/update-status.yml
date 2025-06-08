@@ -5,6 +5,9 @@ on:
     - cron: '5 13 * * *' # Runs every day at 13:05 UTC
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   update-status:
     runs-on: ubuntu-latest
