@@ -6,4 +6,5 @@ Also learning and understanding the [GitHub Actions](https://docs.github.com/en/
 
 ## To-Do
 - [x] Automate it
+- [ ] Managing GitHub Actions
 - [x] Document it (ongoing)
